@@ -53,7 +53,29 @@ struct ContentRoot: View {
 ### ContentView & ContentViewModel
 
 ```swift
-import Foundation
+
+import SwiftUI
+
+struct ContentView: View {
+    
+    @StateObject var vm: ViewModel
+    
+    init(vm: ViewModel) {
+        self._vm = StateObject(wrappedValue: vm)
+    }
+    
+    var body: some View {
+        VStack {
+            Text(self.vm.userName)
+            Button("Change User Name") {
+                self.vm.changeUserName(UUID().uuidString)
+            }
+        }
+        .padding()
+        
+        
+    }
+}
 
 extension ContentView {
     
